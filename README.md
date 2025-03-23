@@ -2,6 +2,12 @@
 
 - Create react app using Vite
 - Configured Tailwindcss
+- Header
+- Routing of App
+- Login Form
+- Signup Form
+- Form Validation
+- useRef hook
 
 # Features
 - Login / Signup
