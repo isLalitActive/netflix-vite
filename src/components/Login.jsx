@@ -1,13 +1,27 @@
-import { useState } from "react";
-import { Header } from "./Header";
 import '../App.css'
+import { useRef, useState } from "react";
+import { Header } from "./Header";
+import { validateData } from '../utils/validate';
+
 
 export const Login = () => {
   const [isSignIn, setIsSignIn] = useState(true);
+  const [errorMessage, setErrorMessage] = useState([]);
+
+  const emailRef = useRef(null);
+  const passwordRef = useRef(null);
 
   const clickHandler = () => {
     setIsSignIn(!isSignIn);
   };
+
+  const signInHandler = () => {
+    console.log(emailRef);
+    console.log(passwordRef);
+    const error = validateData(emailRef.current.value, passwordRef.current.value);
+    console.log(error);
+    setErrorMessage(error);
+  }
 
   return (
     <>
@@ -15,12 +29,14 @@ export const Login = () => {
         <Header /> 
       </div>
 
-      <form>
+      <form onSubmit={(event) => event.preventDefault()}>
         <h1>{isSignIn ? "Sign In" : "Sign up"}</h1>
-        {isSignIn && <input type="textbox" placeholder="Full Name" />}
-        <input type="textbox" placeholder="Email" />
-        <input type="textbox" placeholder="Password" />
-        <button>Sign</button>
+        {!isSignIn && <input type="text" placeholder="Full Name" />}
+        <input ref={emailRef} type="text" placeholder="Email" />
+        <p>{errorMessage[0]}</p>
+        <input ref={passwordRef} type="password" placeholder="Password" />
+        <p style={{ color: "red"}}>{errorMessage[1]}</p>
+        <button onClick={signInHandler}>Sign In</button>
         <p onClick={clickHandler}>
           {isSignIn
             ? "New to Netflix? Sign Up Now"
