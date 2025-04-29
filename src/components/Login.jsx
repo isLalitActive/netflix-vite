@@ -17,7 +17,7 @@ export const Login = () => {
 
   const signInHandler = () => {
     console.log(emailRef);
-    console.log(passwordRef);
+    console.log(passwordRef); 
     const error = validateData(emailRef.current.value, passwordRef.current.value);
     console.log(error);
     setErrorMessage(error);
@@ -33,7 +33,7 @@ export const Login = () => {
         <h1>{isSignIn ? "Sign In" : "Sign up"}</h1>
         {!isSignIn && <input type="text" placeholder="Full Name" />}
         <input ref={emailRef} type="text" placeholder="Email" />
-        <p>{errorMessage[0]}</p>
+        <p style={{ color: "red"}}>{errorMessage[0]}</p>
         <input ref={passwordRef} type="password" placeholder="Password" />
         <p style={{ color: "red"}}>{errorMessage[1]}</p>
         <button onClick={signInHandler}>Sign In</button>
